@@ -18,7 +18,7 @@
     --radius:26px;
   }
 
-  *{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
 
   body{
     margin:0;
@@ -38,7 +38,7 @@
       linear-gradient(160deg, var(--bg1), var(--bg2));
   }
 
-  /* Moving glow (always behind everything) */
+  /* Moving glow */
   .glow{
     position:fixed;
     inset:-30%;
@@ -51,16 +51,17 @@
     z-index:0;
   }
   @keyframes moveGlow{
-    from{transform:translate(0,0) scale(1);}
-    to{transform:translate(-50px,-60px) scale(1.12);}
+    from{ transform:translate(0,0) scale(1); }
+    to{ transform:translate(-50px,-60px) scale(1.12); }
   }
 
-  /* Floating hearts (background) */
+  /* Floating hearts background */
   .hearts{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:1;
+    overflow:hidden;
   }
   .float-heart{
     position:absolute;
@@ -71,10 +72,10 @@
     will-change: transform, opacity;
   }
   @keyframes floatUp{
-    0%{transform:translateY(0) translateX(0) scale(.9); opacity:0;}
-    10%{opacity:.85;}
-    70%{opacity:.85;}
-    100%{transform:translateY(-120vh) translateX(30px) scale(1.35); opacity:0;}
+    0%{ transform:translateY(0) translateX(0) scale(.9); opacity:0; }
+    10%{ opacity:.85; }
+    70%{ opacity:.85; }
+    100%{ transform:translateY(-120vh) translateX(30px) scale(1.35); opacity:0; }
   }
 
   header, footer{
@@ -83,9 +84,17 @@
     color:var(--muted);
     width:min(820px,100%);
   }
-  header{margin-bottom:14px; font-size:14px; line-height:1.5;}
-  header strong{color:#fff; font-weight:900;}
-  footer{margin-top:14px; font-size:13px; letter-spacing:.2px;}
+  header{
+    margin-bottom:14px;
+    font-size:14px;
+    line-height:1.5;
+  }
+  header strong{ color:#fff; font-weight:900; }
+  footer{
+    margin-top:14px;
+    font-size:13px;
+    letter-spacing:.2px;
+  }
 
   .card{
     position:relative;
@@ -97,6 +106,7 @@
     padding:32px;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 30px 90px rgba(0,0,0,.35);
   }
 
   h1{
@@ -138,8 +148,8 @@
     color:#fff;
     box-shadow: 0 12px 30px #ff4fa33a;
   }
-  .yes:hover{transform:translateY(-1px) scale(1.02); filter:brightness(1.08);}
-  .yes:active{transform:scale(.99);}
+  .yes:hover{ transform:translateY(-1px) scale(1.02); filter:brightness(1.08); }
+  .yes:active{ transform:scale(.99); }
 
   .no{
     background:#ffffff14;
@@ -148,7 +158,7 @@
     box-shadow: 0 10px 25px rgba(0,0,0,.22);
   }
 
-  /* Small confetti burst pieces (on button tap) */
+  /* Confetti pieces */
   .confetti{
     position:fixed;
     left:0; top:0;
@@ -156,18 +166,16 @@
     z-index:20;
     will-change: transform, opacity;
     filter: drop-shadow(0 8px 14px rgba(0,0,0,.25));
-    animation: confettiFly 1.6s ease-out forwards;
+    animation: confettiFly 1.4s ease-out forwards;
   }
   @keyframes confettiFly{
-    0%{ transform: translate(0,0) scale(.7); opacity:0; }
-    10%{ opacity:1; }
-    70%{ opacity:1; }
-    100%{ transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(1.35); opacity:0; }
+    0%   { transform: translate(0,0) scale(.7); opacity:0; }
+    10%  { opacity:1; }
+    70%  { opacity:1; }
+    100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(1.35); opacity:0; }
   }
 
-  /* ==========================
-     🎉 FULL CELEBRATION SCREEN
-     ========================== */
+  /* Celebration screen */
   .celebrate{
     position:fixed;
     inset:0;
@@ -186,11 +194,10 @@
   .celebrateLayer{
     position:absolute;
     inset:0;
-    pointer-events:none; /* critical: never block taps */
+    pointer-events:none;
     overflow:hidden;
   }
 
-  /* Continuous celebration hearts */
   .c-heart{
     position:absolute;
     bottom:-70px;
@@ -206,7 +213,6 @@
     100%{ transform: translateY(-130vh) translateX(var(--drift)) scale(1.45); opacity:0; }
   }
 
-  /* Celebration sparkles */
   .spark{
     position:absolute;
     width:6px;height:6px;border-radius:999px;
@@ -227,7 +233,7 @@
     display:grid;
     place-items:center;
     padding:24px;
-    pointer-events:auto; /* content is clickable */
+    pointer-events:auto;
   }
 
   .celebrateCard{
@@ -292,7 +298,6 @@
     border:1px solid #ffffff26;
   }
 
-  /* Reduced motion accessibility */
   @media (prefers-reduced-motion: reduce){
     .glow, .float-heart, .c-heart, .spark, .confetti { animation: none !important; }
   }
@@ -326,7 +331,7 @@ With all my love ur future husband,Habib😁
     </div>
 
     <div class="buttons">
-      <!-- ✅ Inline onclick fallbacks added (text unchanged) -->
+      <!-- Inline fallback (guarantees tapping works IF JS is allowed) -->
       <button class="yes" id="yesBtn" onclick="yesAction()">Yes 💖</button>
       <button class="no" id="noBtn" onclick="noClick()">No 🙈</button>
     </div>
@@ -336,7 +341,6 @@ With all my love ur future husband,Habib😁
     Made with love, patience, and a lot of missing you 💞
   </footer>
 
-  <!-- 🎉 Celebration Screen -->
   <section class="celebrate" id="celebrate" aria-hidden="true">
     <div class="celebrateLayer" id="celebrateLayer" aria-hidden="true"></div>
 
@@ -362,7 +366,6 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
         </div>
 
         <div class="celebrateActions">
-          <!-- ✅ Inline onclick fallbacks added (text unchanged) -->
           <button class="btnPrimary" id="moreConfettiBtn" onclick="moreConfetti()">More confetti 💥</button>
           <button class="btnGhost" id="closeCelebrateBtn" onclick="stopCelebration()">Close</button>
         </div>
@@ -371,60 +374,45 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
   </section>
 
 <script>
-  // Elements
   const heartsLayer = document.getElementById("hearts");
   const yesBtn = document.getElementById("yesBtn");
   const noBtn  = document.getElementById("noBtn");
-
   const celebrate = document.getElementById("celebrate");
   const celebrateLayer = document.getElementById("celebrateLayer");
   const moreConfettiBtn = document.getElementById("moreConfettiBtn");
   const closeCelebrateBtn = document.getElementById("closeCelebrateBtn");
 
-  // Emoji sets
   const bgHearts = ["💗","💕","💖","💘","💝","💞","💓","✨"];
   const burstEmojis = ["💖","💘","💝","💗","💕","💞","💓","✨","🥰","🌸"];
 
-  // =========================
-  // Background floating hearts
-  // =========================
   function spawnFloatingHeart(){
     const h = document.createElement("div");
     h.className = "float-heart";
     h.textContent = bgHearts[Math.floor(Math.random()*bgHearts.length)];
-
     const left = Math.random()*100;
     const size = 14 + Math.random()*24;
     const duration = 10 + Math.random()*12;
     const delay = Math.random()*2;
-
     h.style.left = left + "vw";
     h.style.fontSize = size + "px";
     h.style.animationDuration = duration + "s";
     h.style.animationDelay = delay + "s";
     h.style.opacity = (0.45 + Math.random()*0.45).toFixed(2);
-
     heartsLayer.appendChild(h);
     setTimeout(() => h.remove(), (duration + delay) * 1000 + 200);
   }
-
   for(let i=0;i<16;i++) spawnFloatingHeart();
   setInterval(spawnFloatingHeart, 850);
 
-  // =========================
-  // Confetti burst utility
-  // =========================
   function burstConfetti(x, y, amount = 34){
     for(let i=0;i<amount;i++){
       const c = document.createElement("div");
       c.className = "confetti";
       c.textContent = burstEmojis[Math.floor(Math.random()*burstEmojis.length)];
-
       const dx = (Math.random()*320 - 160) + "px";
       const dy = (Math.random()*-340 - 120) + "px";
       const rot = (Math.random()*720 - 360) + "deg";
       const size = (14 + Math.random()*20) + "px";
-
       c.style.left = x + "px";
       c.style.top  = y + "px";
       c.style.setProperty("--dx", dx);
@@ -432,15 +420,11 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
       c.style.setProperty("--rot", rot);
       c.style.fontSize = size;
       c.style.animationDuration = (1.15 + Math.random()*0.75) + "s";
-
       document.body.appendChild(c);
       setTimeout(() => c.remove(), 1900);
     }
   }
 
-  // =========================
-  // Celebration layer (continuous)
-  // =========================
   let celebrationTimers = [];
   function clearCelebrationTimers(){
     celebrationTimers.forEach(t => clearInterval(t));
@@ -452,20 +436,17 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
     const h = document.createElement("div");
     h.className = "c-heart";
     h.textContent = burstEmojis[Math.floor(Math.random()*burstEmojis.length)];
-
     const left = Math.random()*100;
     const size = 18 + Math.random()*34;
     const duration = 6 + Math.random()*8;
     const delay = Math.random()*1.2;
     const drift = (Math.random()*120 - 60) + "px";
-
     h.style.left = left + "vw";
     h.style.fontSize = size + "px";
     h.style.animationDuration = duration + "s";
     h.style.animationDelay = delay + "s";
     h.style.setProperty("--drift", drift);
     h.style.opacity = (0.6 + Math.random()*0.35).toFixed(2);
-
     celebrateLayer.appendChild(h);
     setTimeout(() => h.remove(), (duration + delay) * 1000 + 300);
   }
@@ -473,12 +454,10 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
   function spawnSpark(){
     const s = document.createElement("div");
     s.className = "spark";
-
     const left = Math.random()*100;
     const size = 4 + Math.random()*6;
     const duration = 7 + Math.random()*7;
     const delay = Math.random()*1.5;
-
     s.style.left = left + "vw";
     s.style.width = size + "px";
     s.style.height = size + "px";
@@ -486,25 +465,18 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
     s.style.animationDuration = duration + "s";
     s.style.animationDelay = delay + "s";
     s.style.opacity = (0.4 + Math.random()*0.5).toFixed(2);
-
     celebrateLayer.appendChild(s);
     setTimeout(() => s.remove(), (duration + delay) * 1000 + 300);
   }
 
   function startCelebration(){
-    // Show celebration
     celebrate.classList.add("show");
     celebrate.setAttribute("aria-hidden","false");
-
-    // Big entrance burst from center
     const cx = window.innerWidth/2;
     const cy = window.innerHeight/2;
     burstConfetti(cx, cy, 70);
-
-    // Start continuous hearts + sparkles
     for(let i=0;i<26;i++) spawnCelebrationHeart();
     for(let i=0;i<22;i++) spawnSpark();
-
     celebrationTimers.push(setInterval(spawnCelebrationHeart, 180));
     celebrationTimers.push(setInterval(spawnSpark, 220));
   }
@@ -515,77 +487,28 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
     clearCelebrationTimers();
   }
 
-  // =========================
-  // Yes handlers (mobile-safe)
-  // =========================
   function yesAction(){
-    // burst on the button itself
     const r = yesBtn.getBoundingClientRect();
     const x = r.left + r.width/2;
     const y = r.top + r.height/2;
     burstConfetti(x, y, 34);
-
-    // then full celebration
     startCelebration();
-
-    // tiny vibration (Android supports, iPhone sometimes ignores)
     if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
   }
 
-  // ✅ Make sure inline onclick can call these
-  window.yesAction = yesAction;
-  window.stopCelebration = stopCelebration;
-
-  // More confetti button
   function moreConfetti(){
     const cx = window.innerWidth/2;
     const cy = window.innerHeight/2 + 40;
     burstConfetti(cx, cy, 90);
     if (navigator.vibrate) navigator.vibrate(40);
   }
-  window.moreConfetti = moreConfetti;
 
-  // Close celebration
-  function closeCelebration(){
-    stopCelebration();
-  }
-  window.closeCelebration = closeCelebration;
-
-  // ✅ Register touch listeners with passive:false (important on iOS/in-app browsers)
-  yesBtn.addEventListener("click", yesAction);
-  yesBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); yesAction(); }, { passive:false });
-  yesBtn.addEventListener("touchend", (e)=>{ /* extra fallback */ }, { passive:false });
-
-  moreConfettiBtn.addEventListener("click", moreConfetti);
-  moreConfettiBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moreConfetti(); }, { passive:false });
-
-  closeCelebrateBtn.addEventListener("click", stopCelebration);
-  closeCelebrateBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); stopCelebration(); }, { passive:false });
-
-  // Tap outside card closes too (optional, feels natural)
-  celebrate.addEventListener("click", (e)=>{
-    if (e.target === celebrate) stopCelebration();
-  });
-  celebrate.addEventListener("touchstart", (e)=>{
-    if (e.target === celebrate) { e.preventDefault(); stopCelebration(); }
-  }, { passive:false });
-
-  // ESC close on desktop
-  window.addEventListener("keydown", (e)=>{
-    if(e.key === "Escape") stopCelebration();
-  });
-
-  // =========================
-  // No button dodge (mobile-safe)
-  // =========================
   function moveNo(){
     const pad = 18;
     const maxX = Math.max(pad, window.innerWidth - noBtn.offsetWidth - pad);
     const maxY = Math.max(pad, window.innerHeight - noBtn.offsetHeight - pad);
-
     const x = Math.random()*maxX;
     const y = Math.random()*maxY;
-
     noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top  = y + "px";
@@ -596,12 +519,32 @@ Now i am just wishing that i was there to celebrate this with u but unfortunatel
     burstConfetti(r.left + r.width/2, r.top + r.height/2, 14);
     moveNo();
   }
+
+  // expose for inline onclick
+  window.yesAction = yesAction;
+  window.moreConfetti = moreConfetti;
+  window.stopCelebration = stopCelebration;
   window.noClick = noClick;
+
+  // touch-safe listeners
+  yesBtn.addEventListener("click", yesAction);
+  yesBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); yesAction(); }, { passive:false });
+
+  moreConfettiBtn.addEventListener("click", moreConfetti);
+  moreConfettiBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moreConfetti(); }, { passive:false });
+
+  closeCelebrateBtn.addEventListener("click", stopCelebration);
+  closeCelebrateBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); stopCelebration(); }, { passive:false });
 
   noBtn.addEventListener("mouseenter", moveNo);
   noBtn.addEventListener("click", noClick);
   noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNo(); }, { passive:false });
 
+  // tap outside closes celebration
+  celebrate.addEventListener("click", (e)=>{ if (e.target === celebrate) stopCelebration(); });
+  celebrate.addEventListener("touchstart", (e)=>{ if (e.target === celebrate) { e.preventDefault(); stopCelebration(); } }, { passive:false });
+
+  window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") stopCelebration(); });
 </script>
 </body>
 </html>
